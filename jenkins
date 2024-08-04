@@ -1,0 +1,82 @@
+pipeline {
+    agent any
+    environment {
+        USERNAME = 'Pritesh'
+        PASSWORD = '123456'
+        IMAGE = 'AMI'
+        GIT_REPO = 'URL'
+        DOMAIN = "XYZ.COM"
+    }
+    parameters {
+        string(name: "NameParam", defaultValue: " ", description: "Please type your name")
+        booleanParam(name: "Are you Human", defaultValue: "true", description: " ")
+        choice(name: "Environment", choices: ['dev', 'qa', 'prod'], description: "Select your deployment Enviornment")
+    }
+
+    stages {
+        stage('checkout SCM') {
+            steps {
+                sh '''
+                   echo "${USERNAME}"
+                   echo "${PASSWORD}"
+                   echo "${GIT_REPO}"
+                   echo "${BUILD_ID}"
+                   echo "${NODE_NAME}"
+                   echo "${NameParam}"
+                   echo "${Environment}"
+                '''
+            }
+        }
+        
+        stage('test') {
+            steps {
+                sh '''
+                  echo "${USERNAME}"
+                  echo "${IMAGE}"
+                '''
+            }
+        }
+        
+        stage('Build') {
+            steps {
+                sh '''
+                  echo "${USERNAME}"
+                  echo "${DOMAIN}"
+                '''
+            }
+        }
+
+        stage('pre-prod') {
+            steps {
+                sh '''
+                  echo "Deploy to Pre-Prod"
+                '''
+            }
+        }
+
+        stage('prod') {
+            input {
+                message "Please confirm deployment to prod"
+            }
+            steps {
+                sh '''
+                  echo "Deploy to Production"
+                '''
+            }
+        }
+    }
+    post {
+        always {
+            echo "Build completed"
+        }
+        success {
+            echo "Build was successful"
+        }
+        failure {
+            echo "Build failed"
+        }
+        aborted {
+            echo "Build was aborted"
+        }
+    }
+}
