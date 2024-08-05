@@ -33,7 +33,7 @@ pipeline {
                 sh '''
                   echo "${USERNAME}"
                   echo "${IMAGE}"
-                  calc 2024
+                  cal 2024
                 '''
             }
         }
