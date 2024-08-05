@@ -33,7 +33,7 @@ pipeline {
                 sh '''
                   echo "${USERNAME}"
                   echo "${IMAGE}"
-                  cal 2024
+                  ip a
                 '''
             }
         }
@@ -43,6 +43,7 @@ pipeline {
                 sh '''
                   echo "${USERNAME}"
                   echo "${DOMAIN}"
+
                 '''
             }
         }
