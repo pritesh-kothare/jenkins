@@ -33,7 +33,7 @@ pipeline {
                 sh '''
                   echo "${USERNAME}"
                   echo "${IMAGE}"
-                  ip a
+                  ls
                 '''
             }
         }
