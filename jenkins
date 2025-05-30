@@ -43,6 +43,7 @@ pipeline {
                 sh '''
                   echo "${USERNAME}"
                   echo "${DOMAIN}"
+                  sh clac
 
                 '''
             }
